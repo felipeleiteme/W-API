@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  fachada:
+    build: ./fachada-fastapi
+    image: fachada-fastapi:latest
+    ports:
+      - '80:8000'
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - zapi_network
+
+networks:
+  zapi_network:
+    driver: bridge
